@@ -12,13 +12,6 @@ A milestone moves to Done only when:
 
 ## To Do
 
-### TASK-4: Sales trend chart
-Add an interactive Plotly line chart of sales over time (FR-2).
-- [ ] Line chart shows sales by month across the 12-month range
-- [ ] Axes are labeled and tooltips show exact values
-
-Commit:
-
 ### TASK-5: Category and region breakdowns
 Add side-by-side bar charts for sales by category and by region (FR-3, FR-4).
 - [ ] Category chart shows all 5 categories, sorted highest to lowest (Electronics first)
@@ -46,12 +39,19 @@ Commit:
 
 ## Done
 
+### TASK-4: Sales trend chart
+Add an interactive Plotly line chart of sales over time (FR-2).
+- [x] Line chart shows sales by month across the 12-month range
+- [x] Axes are labeled and tooltips show exact values
+
+Commit:
+
 ### TASK-3: KPI cards
 Display Total Sales and Total Orders prominently at the top of the dashboard (FR-1).
 - [x] Total Sales is shown formatted as currency (~$116,500)
 - [x] Total Orders is shown with thousands separators (482)
 
-Commit:
+Commit: 6750f48
 
 ### TASK-2: Data loading and basic structure
 Load `data/sales-data.csv` with Pandas and set up the dashboard's layout sections.

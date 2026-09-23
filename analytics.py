@@ -53,3 +53,14 @@ def total_sales(df):
 def total_orders(df):
     """Number of distinct orders (an order can span several rows)."""
     return int(df["order_id"].nunique())
+
+
+def monthly_sales(df):
+    """Total sales for each calendar month, oldest first.
+
+    Months with no orders are included with sales of 0, so the trend
+    line never silently skips a month.
+    """
+    # resample("MS") groups by "Month Start" and fills in any empty months.
+    monthly = df.set_index("date").resample("MS")["total_amount"].sum().reset_index()
+    return monthly.rename(columns={"date": "month", "total_amount": "sales"})

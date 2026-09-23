@@ -137,3 +137,31 @@ def test_totals_are_zero_for_empty_data(tmp_path):
 def test_real_csv_totals_match_prd(real_df):
     assert analytics.total_orders(real_df) == 482
     assert analytics.total_sales(real_df) == pytest.approx(116500.21, abs=0.005)
+
+
+# --- Monthly trend ---------------------------------------------------------
+
+
+def test_monthly_sales_groups_by_month(sample_df):
+    monthly = analytics.monthly_sales(sample_df)
+    assert list(monthly.columns) == ["month", "sales"]
+    # January: 100 + 250
+    assert monthly["month"].iloc[0] == pd.Timestamp("2024-01-01")
+    assert monthly["sales"].iloc[0] == pytest.approx(350.00)
+
+
+def test_monthly_sales_fills_missing_months_with_zero(sample_df):
+    # sample_df has orders in January and March, none in February.
+    monthly = analytics.monthly_sales(sample_df)
+    assert list(monthly["month"]) == [
+        pd.Timestamp("2024-01-01"),
+        pd.Timestamp("2024-02-01"),
+        pd.Timestamp("2024-03-01"),
+    ]
+    assert list(monthly["sales"]) == pytest.approx([350.00, 0.00, 75.00])
+
+
+def test_real_csv_has_twelve_months(real_df):
+    monthly = analytics.monthly_sales(real_df)
+    assert len(monthly) == 12
+    assert monthly["sales"].sum() == pytest.approx(116500.21, abs=0.005)
