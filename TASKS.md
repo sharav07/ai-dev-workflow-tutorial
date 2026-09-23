@@ -12,14 +12,6 @@ A milestone moves to Done only when:
 
 ## To Do
 
-### TASK-5: Category and region breakdowns
-Add side-by-side bar charts for sales by category and by region (FR-3, FR-4).
-- [ ] Category chart shows all 5 categories, sorted highest to lowest (Electronics first)
-- [ ] Region chart shows all 4 regions, sorted highest to lowest
-- [ ] Both charts have clear labels and tooltips with exact values
-
-Commit:
-
 ### TASK-6: Testing and refinement
 Verify numbers against the CSV and polish the dashboard for executive use.
 - [ ] All displayed values match calculations from the CSV
@@ -38,6 +30,14 @@ Commit:
 ## In Progress
 
 ## Done
+
+### TASK-5: Category and region breakdowns
+Add side-by-side bar charts for sales by category and by region (FR-3, FR-4).
+- [x] Category chart shows all 5 categories, sorted highest to lowest (Electronics first)
+- [x] Region chart shows all 4 regions, sorted highest to lowest
+- [x] Both charts have clear labels and tooltips with exact values
+
+Commit:
 
 ### TASK-4: Sales trend chart
 Add an interactive Plotly line chart of sales over time (FR-2).

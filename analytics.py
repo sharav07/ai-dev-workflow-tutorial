@@ -64,3 +64,20 @@ def monthly_sales(df):
     # resample("MS") groups by "Month Start" and fills in any empty months.
     monthly = df.set_index("date").resample("MS")["total_amount"].sum().reset_index()
     return monthly.rename(columns={"date": "month", "total_amount": "sales"})
+
+
+def _sales_by(df, column):
+    """Total sales for each value in `column`, highest first."""
+    totals = df.groupby(column, as_index=False)["total_amount"].sum()
+    totals = totals.rename(columns={"total_amount": "sales"})
+    return totals.sort_values("sales", ascending=False, ignore_index=True)
+
+
+def sales_by_category(df):
+    """Total sales for each product category, highest first."""
+    return _sales_by(df, "category")
+
+
+def sales_by_region(df):
+    """Total sales for each region, highest first."""
+    return _sales_by(df, "region")

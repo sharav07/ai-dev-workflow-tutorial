@@ -165,3 +165,33 @@ def test_real_csv_has_twelve_months(real_df):
     monthly = analytics.monthly_sales(real_df)
     assert len(monthly) == 12
     assert monthly["sales"].sum() == pytest.approx(116500.21, abs=0.005)
+
+
+# --- Category and region breakdowns ----------------------------------------
+
+
+def test_sales_by_category_sums_and_sorts(sample_df):
+    by_category = analytics.sales_by_category(sample_df)
+    assert list(by_category.columns) == ["category", "sales"]
+    # Electronics: 250 + 50 = 300; Audio: 100 + 25 = 125
+    assert list(by_category["category"]) == ["Electronics", "Audio"]
+    assert list(by_category["sales"]) == pytest.approx([300.00, 125.00])
+
+
+def test_sales_by_region_sums_and_sorts(sample_df):
+    by_region = analytics.sales_by_region(sample_df)
+    assert list(by_region.columns) == ["region", "sales"]
+    # South: 250; North: 100 + 50 = 150; East: 25
+    assert list(by_region["region"]) == ["South", "North", "East"]
+    assert list(by_region["sales"]) == pytest.approx([250.00, 150.00, 25.00])
+
+
+def test_real_csv_top_category_is_electronics(real_df):
+    by_category = analytics.sales_by_category(real_df)
+    assert len(by_category) == 5
+    assert by_category["category"].iloc[0] == "Electronics"
+
+
+def test_real_csv_has_all_four_regions(real_df):
+    by_region = analytics.sales_by_region(real_df)
+    assert set(by_region["region"]) == {"North", "South", "East", "West"}
