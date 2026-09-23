@@ -29,6 +29,29 @@ def real_df():
     return analytics.load_data(DATA_PATH)
 
 
+@pytest.fixture
+def sample_df():
+    """Four rows, small enough to check every answer by hand.
+
+    ORD-3 appears twice: one order that contains two different products.
+
+        date        order_id  category     region  total_amount
+        2024-01-05  ORD-1     Audio        North   100.00
+        2024-01-20  ORD-2     Electronics  South   250.00
+        2024-03-02  ORD-3     Electronics  North    50.00
+        2024-03-15  ORD-3     Audio        East     25.00
+    """
+    return pd.DataFrame(
+        {
+            "date": pd.to_datetime(["2024-01-05", "2024-01-20", "2024-03-02", "2024-03-15"]),
+            "order_id": ["ORD-1", "ORD-2", "ORD-3", "ORD-3"],
+            "category": ["Audio", "Electronics", "Electronics", "Audio"],
+            "region": ["North", "South", "North", "East"],
+            "total_amount": [100.00, 250.00, 50.00, 25.00],
+        }
+    )
+
+
 # --- load_data -------------------------------------------------------------
 
 
@@ -90,3 +113,27 @@ def test_real_csv_has_expected_shape(real_df):
     assert len(real_df) == 482
     assert real_df["category"].nunique() == 5
     assert real_df["region"].nunique() == 4
+
+
+# --- KPIs ------------------------------------------------------------------
+
+
+def test_total_sales_sums_amounts(sample_df):
+    # 100 + 250 + 50 + 25
+    assert analytics.total_sales(sample_df) == pytest.approx(425.00)
+
+
+def test_total_orders_counts_each_order_once(sample_df):
+    # ORD-1, ORD-2, ORD-3 (ORD-3 has two rows but is one order)
+    assert analytics.total_orders(sample_df) == 3
+
+
+def test_totals_are_zero_for_empty_data(tmp_path):
+    df = analytics.load_data(write_csv(tmp_path, HEADER))
+    assert analytics.total_sales(df) == 0.0
+    assert analytics.total_orders(df) == 0
+
+
+def test_real_csv_totals_match_prd(real_df):
+    assert analytics.total_orders(real_df) == 482
+    assert analytics.total_sales(real_df) == pytest.approx(116500.21, abs=0.005)

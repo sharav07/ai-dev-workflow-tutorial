@@ -43,3 +43,13 @@ def load_data(path):
         raise ValueError(f"Column 'total_amount' has a value that is not a number ({error})") from error
 
     return df
+
+
+def total_sales(df):
+    """Sum of all order amounts, in dollars."""
+    return float(df["total_amount"].sum())
+
+
+def total_orders(df):
+    """Number of distinct orders (an order can span several rows)."""
+    return int(df["order_id"].nunique())

@@ -29,3 +29,12 @@ try:
 except (FileNotFoundError, ValueError) as error:
     st.error(f"Could not load sales data: {error}")
     st.stop()
+
+if df.empty:
+    st.warning("The sales data file has no rows yet, so there is nothing to show.")
+    st.stop()
+
+# --- KPI cards ---------------------------------------------------------------
+sales_column, orders_column = st.columns(2)
+sales_column.metric("Total Sales", f"${analytics.total_sales(df):,.0f}")
+orders_column.metric("Total Orders", f"{analytics.total_orders(df):,}")
