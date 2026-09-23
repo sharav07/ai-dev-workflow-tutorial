@@ -44,7 +44,7 @@ Add an interactive Plotly line chart of sales over time (FR-2).
 - [x] Line chart shows sales by month across the 12-month range
 - [x] Axes are labeled and tooltips show exact values
 
-Commit:
+Commit: 6f09536
 
 ### TASK-3: KPI cards
 Display Total Sales and Total Orders prominently at the top of the dashboard (FR-1).
