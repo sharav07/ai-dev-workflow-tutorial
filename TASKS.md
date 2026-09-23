@@ -12,14 +12,6 @@ A milestone moves to Done only when:
 
 ## To Do
 
-### TASK-2: Data loading and basic structure
-Load `data/sales-data.csv` with Pandas and set up the dashboard's layout sections.
-- [ ] CSV loads with `date` parsed as a date and numeric columns as numbers
-- [ ] Loaded data has 482 rows, 5 categories, and 4 regions
-- [ ] A clear error message is shown if the CSV is missing or has unexpected columns
-
-Commit:
-
 ### TASK-3: KPI cards
 Display Total Sales and Total Orders prominently at the top of the dashboard (FR-1).
 - [ ] Total Sales is shown formatted as currency (~$116,500)
@@ -60,6 +52,14 @@ Commit:
 ## In Progress
 
 ## Done
+
+### TASK-2: Data loading and basic structure
+Load `data/sales-data.csv` with Pandas and set up the dashboard's layout sections.
+- [x] CSV loads with `date` parsed as a date and numeric columns as numbers
+- [x] Loaded data has 482 rows, 5 categories, and 4 regions
+- [x] A clear error message is shown if the CSV is missing or has unexpected columns
+
+Commit:
 
 ### TASK-1: Environment setup and project initialization
 Set up the Python 3.11+ environment and project skeleton for the Streamlit app.
