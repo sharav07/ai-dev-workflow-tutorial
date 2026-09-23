@@ -29,7 +29,7 @@ Verify numbers against the CSV and polish the dashboard for executive use.
 - [x] Dashboard loads in under 5 seconds with no errors or warnings
 - [x] Layout matches the PRD's expected dashboard layout
 
-Commit:
+Commit: 0e38ccd
 
 ### TASK-5: Category and region breakdowns
 Add side-by-side bar charts for sales by category and by region (FR-3, FR-4).

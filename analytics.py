@@ -24,7 +24,8 @@ def load_data(path):
     """Read the sales CSV and return it as a DataFrame.
 
     Raises ValueError with a readable message if a column is missing,
-    a date is not in YYYY-MM-DD form, or total_amount is not a number.
+    a date is not in YYYY-MM-DD form, total_amount is not a number, or
+    either of those two columns has an empty cell.
     """
     df = pd.read_csv(path)
 
@@ -41,6 +42,12 @@ def load_data(path):
         df["total_amount"] = pd.to_numeric(df["total_amount"])
     except ValueError as error:
         raise ValueError(f"Column 'total_amount' has a value that is not a number ({error})") from error
+
+    # Blank cells don't raise above; they become empty values that would be
+    # silently left out of some totals, so reject them too.
+    for column in ["date", "total_amount"]:
+        if df[column].isna().any():
+            raise ValueError(f"Column '{column}' has an empty value")
 
     return df
 

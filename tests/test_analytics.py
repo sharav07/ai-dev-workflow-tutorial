@@ -104,6 +104,28 @@ def test_load_data_rejects_non_numeric_amount(tmp_path):
         analytics.load_data(path)
 
 
+def test_load_data_rejects_blank_date(tmp_path):
+    path = write_csv(
+        tmp_path,
+        HEADER
+        + "2024-01-15,ORD-1,Headphones,Audio,North,2,49.99,99.98\n"
+        + ",ORD-2,Smart Watch,Wearables,South,1,500.00,500.00\n",
+    )
+    with pytest.raises(ValueError, match="date"):
+        analytics.load_data(path)
+
+
+def test_load_data_rejects_blank_amount(tmp_path):
+    path = write_csv(
+        tmp_path,
+        HEADER
+        + "2024-01-15,ORD-1,Headphones,Audio,North,2,49.99,99.98\n"
+        + "2024-01-16,ORD-2,Smart Watch,Wearables,South,1,500.00,\n",
+    )
+    with pytest.raises(ValueError, match="total_amount"):
+        analytics.load_data(path)
+
+
 def test_load_data_missing_file_raises(tmp_path):
     with pytest.raises(FileNotFoundError):
         analytics.load_data(tmp_path / "does-not-exist.csv")
