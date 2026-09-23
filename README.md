@@ -111,3 +111,4 @@ Open [pre-work-setup.md](pre-work-setup.md) and work through it first, then cont
 ## License
 
 This tutorial is provided for educational purposes.
+**Live Dashboard:** https://ai-dev-workflow-tutorial-uormygwemxmupdhtoawd5.streamlit.app
