@@ -12,14 +12,6 @@ A milestone moves to Done only when:
 
 ## To Do
 
-### TASK-6: Testing and refinement
-Verify numbers against the CSV and polish the dashboard for executive use.
-- [ ] All displayed values match calculations from the CSV
-- [ ] Dashboard loads in under 5 seconds with no errors or warnings
-- [ ] Layout matches the PRD's expected dashboard layout
-
-Commit:
-
 ### TASK-7: Deploy to Streamlit Community Cloud
 Publish the dashboard at a public, shareable URL (NFR-5).
 - [ ] App is deployed to Streamlit Community Cloud and loads without errors
@@ -31,13 +23,21 @@ Commit:
 
 ## Done
 
+### TASK-6: Testing and refinement
+Verify numbers against the CSV and polish the dashboard for executive use.
+- [x] All displayed values match calculations from the CSV
+- [x] Dashboard loads in under 5 seconds with no errors or warnings
+- [x] Layout matches the PRD's expected dashboard layout
+
+Commit:
+
 ### TASK-5: Category and region breakdowns
 Add side-by-side bar charts for sales by category and by region (FR-3, FR-4).
 - [x] Category chart shows all 5 categories, sorted highest to lowest (Electronics first)
 - [x] Region chart shows all 4 regions, sorted highest to lowest
 - [x] Both charts have clear labels and tooltips with exact values
 
-Commit:
+Commit: 61a9d95
 
 ### TASK-4: Sales trend chart
 Add an interactive Plotly line chart of sales over time (FR-2).
